@@ -1,10 +1,10 @@
 // Author's Github: https://github.com/tianlovo
 
-
 #include "Util/ProtobufUtil.h"
 
 #include "Constant/FRegisteredMessages.h"
 #include "Util/PropertyUtil.h"
+#include <sstream>
 
 FString FProtobufUtil::ToSnakeCase(const FString& InputString)
 {
