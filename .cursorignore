@@ -1,0 +1,80 @@
+#
+# Cursor 忽略文件設定說明
+#
+# .cursorindexingignore 檔案：
+#   用於控制哪些檔案會被索引，用於搜尋和上下文功能。
+#   被忽略的檔案仍然可以被 AI 存取，但不會被自動索引或包含在搜尋結果中。
+#   適用於大型檔案或不需要頻繁搜尋的檔案。
+#
+# .cursorignore 檔案：
+#   用於完全排除指定的檔案，使其不被 AI 存取和索引。
+#   這些檔案將完全從 AI 功能和索引中排除。
+#   適用於敏感或機密檔案。
+#
+# 使用建議：
+#   1. 如果檔案包含敏感資訊或不需要 AI 存取，請加入 .cursorignore
+#   2. 如果檔案很大或不需要頻繁搜尋，但允許 AI 存取，請加入 .cursorindexingignore
+#   3. 可以同時使用兩種檔案來精確控制檔案的可見性和可存取性
+#
+# 格式範例：https://cursor.qiannianlu.com/docs/context/ignore-files/
+
+# 排除特定檔案類型（敏感編譯檔案）
+*.obj
+*.o
+*.lo
+*.slo
+*.pch
+*.gch
+*.dll
+*.dylib
+*.so
+*.a
+*.la
+*.lai
+*.lib
+*.app
+*.exe
+*.ipa
+*.out
+*.mod
+*.ncb
+*.opensdf
+*.pdb
+*.sdf
+*.sln
+*.suo
+*.VC.db
+*.VC.opendb
+*.xcworkspace
+*.xcodeproj
+
+# 版本控制
+**/.git
+**/.svn
+
+# 編輯器
+**/.idea
+**/.venv
+**/.vs
+**/.vscode
+**/*.vsconfig
+**/.editorconfig
+~*
+**/~*
+**/.~*
+
+# Unreal Engine（大型文件，允許 AI 存取但不索引）
+**/Binaries
+**/*Build*
+**/DerivedDataCache
+**/Engine/Documentation
+**/Engine/Extras
+**/Intermediate
+**/Engine/Platforms
+**/Plugins/**/Resources
+**/Engine/Programs
+**/Saved
+**/Engine/Shaders
+
+# UE 專案
+**/LICENSE

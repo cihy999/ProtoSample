@@ -1,0 +1,86 @@
+{
+    "folders": [
+		{
+			"path": "."
+		},
+    ],
+    "settings": {
+        "editor.tabSize": 4,
+        "files.exclude": {
+            // 特定檔案類型
+            "*.sln": true,
+            "*.pdb": true,
+            "*.ncb": true,
+            "*.suo": true,
+            // 版本控制
+            "**/.git": true,
+            "**/.svn": true,
+            "**/*.git*": true,
+            "**/*.md": true,
+            // 編輯器
+            "**/.vs": true,
+            "**/.vscode": true,
+            "**/*.vsconfig": true,
+            "**/.editorconfig": true,
+            "**/.idea": true,
+            "**/.venv": true,
+            "~*": true,
+            "**/~*": true,
+            "**/.~*": true,
+            // Unreal Engine
+            "**/Binaries": true,
+            "**/*Build*": true,
+            "**/Engine/Config": true,
+            "**/Content": true,
+            "**/DerivedDataCache": true,
+            "**/Engine/Documentation": true,
+            "**/Engine/Extras": true,
+            "**/Intermediate": true,
+            "**/Engine/Platforms": true,
+            "**/Plugins/**/Resources": true,
+            "**/Engine/Programs": true,
+            "**/Saved": true,
+            "**/Engine/Shaders": true,
+			// UE 專案
+            "**/LICENSE": true,
+        },
+        "search.exclude": {
+            // 特定檔案類型
+            "*.sln": true,
+            "*.pdb": true,
+            "*.ncb": true,
+            "*.suo": true,
+            // 版本控制
+            "**/.git": true,
+            "**/.svn": true,
+            "**/*.git*": true,
+            "**/*.md": true,
+            // 編輯器
+            "**/.vs": true,
+            "**/.vscode": true,
+            "**/*.vsconfig": true,
+            "**/.editorconfig": true,
+            "**/.idea": true,
+            "**/.venv": true,
+            "~*": true,
+            "**/~*": true,
+            "**/.~*": true,
+            // Unreal Engine
+            "**/Binaries": true,
+            "**/*Build*": true,
+            "**/Engine/Config": true,
+            "**/Content": true,
+            "**/DerivedDataCache": true,
+            "**/Engine/Documentation": true,
+            "**/Engine/Extras": true,
+            "**/Intermediate": true,
+            "**/Engine/Platforms": true,
+            "**/Plugins/**/Resources": true,
+            "**/Engine/Programs": true,
+            "**/Saved/**": true,
+            "**/Engine/Shaders": true,
+            // UE 專案
+        },
+        "dotnet.preferCSharpExtension": true
+    }
+}
