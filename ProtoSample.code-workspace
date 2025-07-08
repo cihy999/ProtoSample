@@ -15,7 +15,6 @@
             // 版本控制
             "**/.git": true,
             "**/.svn": true,
-            "**/*.git*": true,
             "**/*.md": true,
             // 編輯器
             "**/.vs": true,
