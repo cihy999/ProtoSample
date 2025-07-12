@@ -1,7 +1,7 @@
 @echo off
-set PROTOC_EXE=protoc.exe
-set IN_DIR=%~dp0..\..\..\..\Example
-set OUT_DIR_CPP=%~dp0..\..\..\ProtobufBlueprintSp\Private\ProtoGenExample
+set PROTOC_EXE=%~dp0..\Plugins\ProtobufBlueprintSp\Source\ThirdParty\libprotobuf\bin\protoc.exe
+set IN_DIR=%~dp0protos
+set OUT_DIR_CPP=%~dp0..\Source\ProtoSample\Message
 
 echo [Info] 使用 protoc 編譯 .proto 成 C++ 檔案...
 
