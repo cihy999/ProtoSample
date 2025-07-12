@@ -79,6 +79,38 @@ void AProtoSampleGameMode::DeserializeTestMessage2()
 	{
 		UE_LOG(LogTemp, Error, TEXT("Failed to deserialize TestMessage2"));
 	}
+
+	// 確認未知欄位
+	const google::protobuf::Reflection* Reflection = Message.GetReflection();
+	if (Reflection)
+	{
+		const google::protobuf::UnknownFieldSet& UnknownFields = Reflection->GetUnknownFields(Message);
+
+		for (int i = 0; i < UnknownFields.field_count(); ++i)
+		{
+			const auto& Field = UnknownFields.field(i);
+			int FieldNumber = Field.number();
+
+			switch (Field.type())
+			{
+			case google::protobuf::UnknownField::TYPE_VARINT:
+				UE_LOG(LogTemp, Log, TEXT(" [Unknown] Field %d: VARINT = %lld"), FieldNumber, Field.varint());
+				break;
+			case google::protobuf::UnknownField::TYPE_FIXED32:
+				UE_LOG(LogTemp, Log, TEXT(" [Unknown] Field %d: FIXED32 = %u"), FieldNumber, Field.fixed32());
+				break;
+			case google::protobuf::UnknownField::TYPE_FIXED64:
+				UE_LOG(LogTemp, Log, TEXT(" [Unknown] Field %d: FIXED64 = %llu"), FieldNumber, Field.fixed64());
+				break;
+			case google::protobuf::UnknownField::TYPE_LENGTH_DELIMITED:
+				UE_LOG(LogTemp, Log, TEXT(" [Unknown] Field %d: BYTES size = %d"), FieldNumber, Field.length_delimited().size());
+				break;
+			default:
+				UE_LOG(LogTemp, Warning, TEXT(" [Unknown] Field %d: Unsupported type"), FieldNumber);
+				break;
+			}
+		}
+	}
 }
 
 AProtoSampleGameMode::AProtoSampleGameMode()
