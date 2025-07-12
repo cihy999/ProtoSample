@@ -1,0 +1,7 @@
+syntax = "proto3";
+package ProtobufBlueprintSp;
+
+message TestMessage1 {
+    int32 val_1 = 1;
+    int32 val_2 = 2;
+}
