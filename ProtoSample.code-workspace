@@ -28,7 +28,7 @@
             "**/.~*": true,
             // Unreal Engine
             "**/Binaries": true,
-            "**/*Build*": true,
+            "**/*Build*": false,
             "**/Engine/Config": true,
             "**/Content": true,
             "**/DerivedDataCache": true,
