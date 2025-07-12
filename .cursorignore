@@ -49,7 +49,7 @@
 *.xcodeproj
 
 # 版本控制
-**/.git
+**/.git*
 **/.svn
 
 # 編輯器
