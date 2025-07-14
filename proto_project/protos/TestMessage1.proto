@@ -1,7 +1,9 @@
 syntax = "proto3";
+import "google/protobuf/struct.proto";
 package ProtobufBlueprintSp;
 
 message TestMessage1 {
     int32 val_1 = 1;
     int32 val_2 = 2;
+    google.protobuf.Struct custom_message = 101;
 }

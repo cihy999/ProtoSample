@@ -38,7 +38,8 @@ PROTOBUF_PRAGMA_INIT_SEG
 namespace ProtobufBlueprintSp {
 constexpr TestMessage1::TestMessage1(
   ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : val_1_(0)
+  : custom_message_(nullptr)
+  , val_1_(0)
   , val_2_(0){}
 struct TestMessage1DefaultTypeInternal {
   constexpr TestMessage1DefaultTypeInternal()
@@ -63,6 +64,7 @@ const uint32_t TableStruct_TestMessage1_2eproto::offsets[] PROTOBUF_SECTION_VARI
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::ProtobufBlueprintSp::TestMessage1, val_1_),
   PROTOBUF_FIELD_OFFSET(::ProtobufBlueprintSp::TestMessage1, val_2_),
+  PROTOBUF_FIELD_OFFSET(::ProtobufBlueprintSp::TestMessage1, custom_message_),
 };
 static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, -1, sizeof(::ProtobufBlueprintSp::TestMessage1)},
@@ -74,13 +76,18 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
 
 const char descriptor_table_protodef_TestMessage1_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
   "\n\022TestMessage1.proto\022\023ProtobufBlueprintS"
-  "p\",\n\014TestMessage1\022\r\n\005val_1\030\001 \001(\005\022\r\n\005val_"
-  "2\030\002 \001(\005b\006proto3"
+  "p\032\034google/protobuf/struct.proto\"]\n\014TestM"
+  "essage1\022\r\n\005val_1\030\001 \001(\005\022\r\n\005val_2\030\002 \001(\005\022/\n"
+  "\016custom_message\030e \001(\0132\027.google.protobuf."
+  "Structb\006proto3"
   ;
+static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_TestMessage1_2eproto_deps[1] = {
+  &::descriptor_table_google_2fprotobuf_2fstruct_2eproto,
+};
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_TestMessage1_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_TestMessage1_2eproto = {
-  false, false, 95, descriptor_table_protodef_TestMessage1_2eproto, "TestMessage1.proto", 
-  &descriptor_table_TestMessage1_2eproto_once, nullptr, 0, 1,
+  false, false, 174, descriptor_table_protodef_TestMessage1_2eproto, "TestMessage1.proto", 
+  &descriptor_table_TestMessage1_2eproto_once, descriptor_table_TestMessage1_2eproto_deps, 1, 1,
   schemas, file_default_instances, TableStruct_TestMessage1_2eproto::offsets,
   file_level_metadata_TestMessage1_2eproto, file_level_enum_descriptors_TestMessage1_2eproto, file_level_service_descriptors_TestMessage1_2eproto,
 };
@@ -96,8 +103,19 @@ namespace ProtobufBlueprintSp {
 
 class TestMessage1::_Internal {
  public:
+  static const ::PROTOBUF_NAMESPACE_ID::Struct& custom_message(const TestMessage1* msg);
 };
 
+const ::PROTOBUF_NAMESPACE_ID::Struct&
+TestMessage1::_Internal::custom_message(const TestMessage1* msg) {
+  return *msg->custom_message_;
+}
+void TestMessage1::clear_custom_message() {
+  if (GetArenaForAllocation() == nullptr && custom_message_ != nullptr) {
+    delete custom_message_;
+  }
+  custom_message_ = nullptr;
+}
 TestMessage1::TestMessage1(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
@@ -110,6 +128,11 @@ TestMessage1::TestMessage1(::PROTOBUF_NAMESPACE_ID::Arena* arena,
 TestMessage1::TestMessage1(const TestMessage1& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  if (from._internal_has_custom_message()) {
+    custom_message_ = new ::PROTOBUF_NAMESPACE_ID::Struct(*from.custom_message_);
+  } else {
+    custom_message_ = nullptr;
+  }
   ::memcpy(&val_1_, &from.val_1_,
     static_cast<size_t>(reinterpret_cast<char*>(&val_2_) -
     reinterpret_cast<char*>(&val_1_)) + sizeof(val_2_));
@@ -118,9 +141,9 @@ TestMessage1::TestMessage1(const TestMessage1& from)
 
 inline void TestMessage1::SharedCtor() {
 ::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
-    reinterpret_cast<char*>(&val_1_) - reinterpret_cast<char*>(this)),
+    reinterpret_cast<char*>(&custom_message_) - reinterpret_cast<char*>(this)),
     0, static_cast<size_t>(reinterpret_cast<char*>(&val_2_) -
-    reinterpret_cast<char*>(&val_1_)) + sizeof(val_2_));
+    reinterpret_cast<char*>(&custom_message_)) + sizeof(val_2_));
 }
 
 TestMessage1::~TestMessage1() {
@@ -132,6 +155,7 @@ TestMessage1::~TestMessage1() {
 
 inline void TestMessage1::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  if (this != internal_default_instance()) delete custom_message_;
 }
 
 void TestMessage1::ArenaDtor(void* object) {
@@ -150,6 +174,10 @@ void TestMessage1::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
+  if (GetArenaForAllocation() == nullptr && custom_message_ != nullptr) {
+    delete custom_message_;
+  }
+  custom_message_ = nullptr;
   ::memset(&val_1_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&val_2_) -
       reinterpret_cast<char*>(&val_1_)) + sizeof(val_2_));
@@ -174,6 +202,14 @@ const char* TestMessage1::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_I
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
           val_2_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // .google.protobuf.Struct custom_message = 101;
+      case 101:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 42)) {
+          ptr = ctx->ParseMessage(_internal_mutable_custom_message(), ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -219,6 +255,14 @@ uint8_t* TestMessage1::_InternalSerialize(
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(2, this->_internal_val_2(), target);
   }
 
+  // .google.protobuf.Struct custom_message = 101;
+  if (this->_internal_has_custom_message()) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(
+        101, _Internal::custom_message(this), target, stream);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -234,6 +278,13 @@ size_t TestMessage1::ByteSizeLong() const {
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
+
+  // .google.protobuf.Struct custom_message = 101;
+  if (this->_internal_has_custom_message()) {
+    total_size += 2 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *custom_message_);
+  }
 
   // int32 val_1 = 1;
   if (this->_internal_val_1() != 0) {
@@ -267,6 +318,9 @@ void TestMessage1::MergeFrom(const TestMessage1& from) {
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
+  if (from._internal_has_custom_message()) {
+    _internal_mutable_custom_message()->::PROTOBUF_NAMESPACE_ID::Struct::MergeFrom(from._internal_custom_message());
+  }
   if (from._internal_val_1() != 0) {
     _internal_set_val_1(from._internal_val_1());
   }
@@ -293,9 +347,9 @@ void TestMessage1::InternalSwap(TestMessage1* other) {
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
       PROTOBUF_FIELD_OFFSET(TestMessage1, val_2_)
       + sizeof(TestMessage1::val_2_)
-      - PROTOBUF_FIELD_OFFSET(TestMessage1, val_1_)>(
-          reinterpret_cast<char*>(&val_1_),
-          reinterpret_cast<char*>(&other->val_1_));
+      - PROTOBUF_FIELD_OFFSET(TestMessage1, custom_message_)>(
+          reinterpret_cast<char*>(&custom_message_),
+          reinterpret_cast<char*>(&other->custom_message_));
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata TestMessage1::GetMetadata() const {

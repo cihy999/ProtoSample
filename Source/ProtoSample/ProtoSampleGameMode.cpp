@@ -4,6 +4,8 @@
 #include "ProtoSampleGameMode.h"
 // UE
 #include "UObject/ConstructorHelpers.h"
+// google_protobuf
+#include <google/protobuf/struct.pb.h>
 // ProtoSample
 #include "Message/TestMessage1.pb.h"
 #include "Message/TestMessage2.pb.h"
@@ -13,8 +15,18 @@ void AProtoSampleGameMode::SerializeTestMessage1()
 {
 	ProtobufBlueprintSp::TestMessage1 Message;
 
+	// 設定靜態欄位
 	Message.set_val_1(50);
 	Message.set_val_2(100);
+
+	// 設定動態欄位
+	google::protobuf::Value BoolVal;
+	BoolVal.set_bool_value(true);
+	(*Message.mutable_custom_message()->mutable_fields())["is_boss"] = BoolVal;
+
+	google::protobuf::Value NameVal;
+	NameVal.set_string_value("Cindy");
+	(*Message.mutable_custom_message()->mutable_fields())["player_name"] = NameVal;
 
 	std::string BinaryData;
 	if (Message.SerializeToString(&BinaryData))
@@ -59,6 +71,24 @@ void AProtoSampleGameMode::DeserializeTestMessage1()
 		UE_LOG(LogTemp, Log, TEXT("Deserialized TestMessage1 ==="));
 		UE_LOG(LogTemp, Log, TEXT(" val_1 = %d"), Message.val_1());
 		UE_LOG(LogTemp, Log, TEXT(" val_2 = %d"), Message.val_2());
+
+		UE_LOG(LogTemp, Log, TEXT(" custom_message: {"));
+		const auto& StructData = Message.custom_message();
+		for (const auto& pair : StructData.fields())
+		{
+			const std::string& Key = pair.first;
+			const auto& Value = pair.second;
+
+			if (Value.has_string_value())
+			{
+				UE_LOG(LogTemp, Log, TEXT(" %s: %s"), *FString(Key.c_str()), *FString(Value.string_value().c_str()));
+			}
+			else if (Value.has_bool_value())
+			{
+				UE_LOG(LogTemp, Log, TEXT(" %s: %s"), *FString(Key.c_str()), Value.bool_value() ? TEXT("true") : TEXT("false"));
+			}
+		}
+		UE_LOG(LogTemp, Log, TEXT(" }"));
 	}
 	else
 	{

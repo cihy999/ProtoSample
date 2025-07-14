@@ -36,6 +36,7 @@
 #include <google/protobuf/repeated_field.h>  // IWYU pragma: export
 #include <google/protobuf/extension_set.h>  // IWYU pragma: export
 #include <google/protobuf/unknown_field_set.h>
+#include <google/protobuf/struct.pb.h>
 // @@protoc_insertion_point(includes)
 #include <google/protobuf/port_def.inc>
 #define PROTOBUF_INTERNAL_EXPORT_TestMessage1_2eproto
@@ -192,9 +193,28 @@ class TestMessage1 final :
   // accessors -------------------------------------------------------
 
   enum : int {
+    kCustomMessageFieldNumber = 101,
     kVal1FieldNumber = 1,
     kVal2FieldNumber = 2,
   };
+  // .google.protobuf.Struct custom_message = 101;
+  bool has_custom_message() const;
+  private:
+  bool _internal_has_custom_message() const;
+  public:
+  void clear_custom_message();
+  const ::PROTOBUF_NAMESPACE_ID::Struct& custom_message() const;
+  PROTOBUF_NODISCARD ::PROTOBUF_NAMESPACE_ID::Struct* release_custom_message();
+  ::PROTOBUF_NAMESPACE_ID::Struct* mutable_custom_message();
+  void set_allocated_custom_message(::PROTOBUF_NAMESPACE_ID::Struct* custom_message);
+  private:
+  const ::PROTOBUF_NAMESPACE_ID::Struct& _internal_custom_message() const;
+  ::PROTOBUF_NAMESPACE_ID::Struct* _internal_mutable_custom_message();
+  public:
+  void unsafe_arena_set_allocated_custom_message(
+      ::PROTOBUF_NAMESPACE_ID::Struct* custom_message);
+  ::PROTOBUF_NAMESPACE_ID::Struct* unsafe_arena_release_custom_message();
+
   // int32 val_1 = 1;
   void clear_val_1();
   int32_t val_1() const;
@@ -220,6 +240,7 @@ class TestMessage1 final :
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::Struct* custom_message_;
   int32_t val_1_;
   int32_t val_2_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
@@ -274,6 +295,92 @@ inline void TestMessage1::_internal_set_val_2(int32_t value) {
 inline void TestMessage1::set_val_2(int32_t value) {
   _internal_set_val_2(value);
   // @@protoc_insertion_point(field_set:ProtobufBlueprintSp.TestMessage1.val_2)
+}
+
+// .google.protobuf.Struct custom_message = 101;
+inline bool TestMessage1::_internal_has_custom_message() const {
+  return this != internal_default_instance() && custom_message_ != nullptr;
+}
+inline bool TestMessage1::has_custom_message() const {
+  return _internal_has_custom_message();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::Struct& TestMessage1::_internal_custom_message() const {
+  const ::PROTOBUF_NAMESPACE_ID::Struct* p = custom_message_;
+  return p != nullptr ? *p : reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Struct&>(
+      ::PROTOBUF_NAMESPACE_ID::_Struct_default_instance_);
+}
+inline const ::PROTOBUF_NAMESPACE_ID::Struct& TestMessage1::custom_message() const {
+  // @@protoc_insertion_point(field_get:ProtobufBlueprintSp.TestMessage1.custom_message)
+  return _internal_custom_message();
+}
+inline void TestMessage1::unsafe_arena_set_allocated_custom_message(
+    ::PROTOBUF_NAMESPACE_ID::Struct* custom_message) {
+  if (GetArenaForAllocation() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(custom_message_);
+  }
+  custom_message_ = custom_message;
+  if (custom_message) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:ProtobufBlueprintSp.TestMessage1.custom_message)
+}
+inline ::PROTOBUF_NAMESPACE_ID::Struct* TestMessage1::release_custom_message() {
+  
+  ::PROTOBUF_NAMESPACE_ID::Struct* temp = custom_message_;
+  custom_message_ = nullptr;
+#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
+  auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
+  temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  if (GetArenaForAllocation() == nullptr) { delete old; }
+#else  // PROTOBUF_FORCE_COPY_IN_RELEASE
+  if (GetArenaForAllocation() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
+  return temp;
+}
+inline ::PROTOBUF_NAMESPACE_ID::Struct* TestMessage1::unsafe_arena_release_custom_message() {
+  // @@protoc_insertion_point(field_release:ProtobufBlueprintSp.TestMessage1.custom_message)
+  
+  ::PROTOBUF_NAMESPACE_ID::Struct* temp = custom_message_;
+  custom_message_ = nullptr;
+  return temp;
+}
+inline ::PROTOBUF_NAMESPACE_ID::Struct* TestMessage1::_internal_mutable_custom_message() {
+  
+  if (custom_message_ == nullptr) {
+    auto* p = CreateMaybeMessage<::PROTOBUF_NAMESPACE_ID::Struct>(GetArenaForAllocation());
+    custom_message_ = p;
+  }
+  return custom_message_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::Struct* TestMessage1::mutable_custom_message() {
+  ::PROTOBUF_NAMESPACE_ID::Struct* _msg = _internal_mutable_custom_message();
+  // @@protoc_insertion_point(field_mutable:ProtobufBlueprintSp.TestMessage1.custom_message)
+  return _msg;
+}
+inline void TestMessage1::set_allocated_custom_message(::PROTOBUF_NAMESPACE_ID::Struct* custom_message) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
+  if (message_arena == nullptr) {
+    delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(custom_message_);
+  }
+  if (custom_message) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper<
+            ::PROTOBUF_NAMESPACE_ID::MessageLite>::GetOwningArena(
+                reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(custom_message));
+    if (message_arena != submessage_arena) {
+      custom_message = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, custom_message, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  custom_message_ = custom_message;
+  // @@protoc_insertion_point(field_set_allocated:ProtobufBlueprintSp.TestMessage1.custom_message)
 }
 
 #ifdef __GNUC__
