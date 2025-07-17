@@ -1,5 +1,5 @@
 syntax = "proto3";
-package ProtobufBlueprintSp;
+package protobuf;
 
 message TestMessage2 {
     int32 val_1 = 1;

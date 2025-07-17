@@ -58,20 +58,20 @@ struct TableStruct_TestMessage2_2eproto {
   static const uint32_t offsets[];
 };
 extern const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_TestMessage2_2eproto;
-namespace ProtobufBlueprintSp {
+namespace protobuf {
 class TestMessage2;
 struct TestMessage2DefaultTypeInternal;
 extern TestMessage2DefaultTypeInternal _TestMessage2_default_instance_;
-}  // namespace ProtobufBlueprintSp
+}  // namespace protobuf
 PROTOBUF_NAMESPACE_OPEN
-template<> ::ProtobufBlueprintSp::TestMessage2* Arena::CreateMaybeMessage<::ProtobufBlueprintSp::TestMessage2>(Arena*);
+template<> ::protobuf::TestMessage2* Arena::CreateMaybeMessage<::protobuf::TestMessage2>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
-namespace ProtobufBlueprintSp {
+namespace protobuf {
 
 // ===================================================================
 
 class TestMessage2 final :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:ProtobufBlueprintSp.TestMessage2) */ {
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:protobuf.TestMessage2) */ {
  public:
   inline TestMessage2() : TestMessage2(nullptr) {}
   ~TestMessage2() override;
@@ -172,7 +172,7 @@ class TestMessage2 final :
   private:
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "ProtobufBlueprintSp.TestMessage2";
+    return "protobuf.TestMessage2";
   }
   protected:
   explicit TestMessage2(::PROTOBUF_NAMESPACE_ID::Arena* arena,
@@ -203,7 +203,7 @@ class TestMessage2 final :
   void _internal_set_val_1(int32_t value);
   public:
 
-  // @@protoc_insertion_point(class_scope:ProtobufBlueprintSp.TestMessage2)
+  // @@protoc_insertion_point(class_scope:protobuf.TestMessage2)
  private:
   class _Internal;
 
@@ -233,7 +233,7 @@ inline int32_t TestMessage2::_internal_val_1() const {
   return val_1_;
 }
 inline int32_t TestMessage2::val_1() const {
-  // @@protoc_insertion_point(field_get:ProtobufBlueprintSp.TestMessage2.val_1)
+  // @@protoc_insertion_point(field_get:protobuf.TestMessage2.val_1)
   return _internal_val_1();
 }
 inline void TestMessage2::_internal_set_val_1(int32_t value) {
@@ -242,7 +242,7 @@ inline void TestMessage2::_internal_set_val_1(int32_t value) {
 }
 inline void TestMessage2::set_val_1(int32_t value) {
   _internal_set_val_1(value);
-  // @@protoc_insertion_point(field_set:ProtobufBlueprintSp.TestMessage2.val_1)
+  // @@protoc_insertion_point(field_set:protobuf.TestMessage2.val_1)
 }
 
 #ifdef __GNUC__
@@ -251,7 +251,7 @@ inline void TestMessage2::set_val_1(int32_t value) {
 
 // @@protoc_insertion_point(namespace_scope)
 
-}  // namespace ProtobufBlueprintSp
+}  // namespace protobuf
 
 // @@protoc_insertion_point(global_scope)
 

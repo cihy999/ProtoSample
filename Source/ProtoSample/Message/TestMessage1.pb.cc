@@ -35,7 +35,7 @@
 #include <google/protobuf/port_def.inc>
 
 PROTOBUF_PRAGMA_INIT_SEG
-namespace ProtobufBlueprintSp {
+namespace protobuf {
 constexpr TestMessage1::TestMessage1(
   ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
   : val_1_(0)
@@ -49,37 +49,37 @@ struct TestMessage1DefaultTypeInternal {
   };
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT TestMessage1DefaultTypeInternal _TestMessage1_default_instance_;
-}  // namespace ProtobufBlueprintSp
+}  // namespace protobuf
 static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_TestMessage1_2eproto[1];
 static constexpr ::PROTOBUF_NAMESPACE_ID::EnumDescriptor const** file_level_enum_descriptors_TestMessage1_2eproto = nullptr;
 static constexpr ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor const** file_level_service_descriptors_TestMessage1_2eproto = nullptr;
 
 const uint32_t TableStruct_TestMessage1_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   ~0u,  // no _has_bits_
-  PROTOBUF_FIELD_OFFSET(::ProtobufBlueprintSp::TestMessage1, _internal_metadata_),
+  PROTOBUF_FIELD_OFFSET(::protobuf::TestMessage1, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::ProtobufBlueprintSp::TestMessage1, val_1_),
-  PROTOBUF_FIELD_OFFSET(::ProtobufBlueprintSp::TestMessage1, val_2_),
+  PROTOBUF_FIELD_OFFSET(::protobuf::TestMessage1, val_1_),
+  PROTOBUF_FIELD_OFFSET(::protobuf::TestMessage1, val_2_),
 };
 static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
-  { 0, -1, -1, sizeof(::ProtobufBlueprintSp::TestMessage1)},
+  { 0, -1, -1, sizeof(::protobuf::TestMessage1)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
-  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::ProtobufBlueprintSp::_TestMessage1_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::protobuf::_TestMessage1_default_instance_),
 };
 
 const char descriptor_table_protodef_TestMessage1_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\022TestMessage1.proto\022\023ProtobufBlueprintS"
-  "p\",\n\014TestMessage1\022\r\n\005val_1\030\001 \001(\005\022\r\n\005val_"
-  "2\030\002 \001(\005b\006proto3"
+  "\n\022TestMessage1.proto\022\010protobuf\",\n\014TestMe"
+  "ssage1\022\r\n\005val_1\030\001 \001(\005\022\r\n\005val_2\030\002 \001(\005b\006pr"
+  "oto3"
   ;
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_TestMessage1_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_TestMessage1_2eproto = {
-  false, false, 95, descriptor_table_protodef_TestMessage1_2eproto, "TestMessage1.proto", 
+  false, false, 84, descriptor_table_protodef_TestMessage1_2eproto, "TestMessage1.proto", 
   &descriptor_table_TestMessage1_2eproto_once, nullptr, 0, 1,
   schemas, file_default_instances, TableStruct_TestMessage1_2eproto::offsets,
   file_level_metadata_TestMessage1_2eproto, file_level_enum_descriptors_TestMessage1_2eproto, file_level_service_descriptors_TestMessage1_2eproto,
@@ -90,7 +90,7 @@ PROTOBUF_ATTRIBUTE_WEAK const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable
 
 // Force running AddDescriptors() at dynamic initialization time.
 PROTOBUF_ATTRIBUTE_INIT_PRIORITY static ::PROTOBUF_NAMESPACE_ID::internal::AddDescriptorsRunner dynamic_init_dummy_TestMessage1_2eproto(&descriptor_table_TestMessage1_2eproto);
-namespace ProtobufBlueprintSp {
+namespace protobuf {
 
 // ===================================================================
 
@@ -105,7 +105,7 @@ TestMessage1::TestMessage1(::PROTOBUF_NAMESPACE_ID::Arena* arena,
   if (!is_message_owned) {
     RegisterArenaDtor(arena);
   }
-  // @@protoc_insertion_point(arena_constructor:ProtobufBlueprintSp.TestMessage1)
+  // @@protoc_insertion_point(arena_constructor:protobuf.TestMessage1)
 }
 TestMessage1::TestMessage1(const TestMessage1& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
@@ -113,7 +113,7 @@ TestMessage1::TestMessage1(const TestMessage1& from)
   ::memcpy(&val_1_, &from.val_1_,
     static_cast<size_t>(reinterpret_cast<char*>(&val_2_) -
     reinterpret_cast<char*>(&val_1_)) + sizeof(val_2_));
-  // @@protoc_insertion_point(copy_constructor:ProtobufBlueprintSp.TestMessage1)
+  // @@protoc_insertion_point(copy_constructor:protobuf.TestMessage1)
 }
 
 inline void TestMessage1::SharedCtor() {
@@ -124,7 +124,7 @@ inline void TestMessage1::SharedCtor() {
 }
 
 TestMessage1::~TestMessage1() {
-  // @@protoc_insertion_point(destructor:ProtobufBlueprintSp.TestMessage1)
+  // @@protoc_insertion_point(destructor:protobuf.TestMessage1)
   if (GetArenaForAllocation() != nullptr) return;
   SharedDtor();
   _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
@@ -145,7 +145,7 @@ void TestMessage1::SetCachedSize(int size) const {
 }
 
 void TestMessage1::Clear() {
-// @@protoc_insertion_point(message_clear_start:ProtobufBlueprintSp.TestMessage1)
+// @@protoc_insertion_point(message_clear_start:protobuf.TestMessage1)
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
@@ -203,7 +203,7 @@ failure:
 
 uint8_t* TestMessage1::_InternalSerialize(
     uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:ProtobufBlueprintSp.TestMessage1)
+  // @@protoc_insertion_point(serialize_to_array_start:protobuf.TestMessage1)
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -223,12 +223,12 @@ uint8_t* TestMessage1::_InternalSerialize(
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:ProtobufBlueprintSp.TestMessage1)
+  // @@protoc_insertion_point(serialize_to_array_end:protobuf.TestMessage1)
   return target;
 }
 
 size_t TestMessage1::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:ProtobufBlueprintSp.TestMessage1)
+// @@protoc_insertion_point(message_byte_size_start:protobuf.TestMessage1)
   size_t total_size = 0;
 
   uint32_t cached_has_bits = 0;
@@ -262,7 +262,7 @@ void TestMessage1::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message* to,
 
 
 void TestMessage1::MergeFrom(const TestMessage1& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:ProtobufBlueprintSp.TestMessage1)
+// @@protoc_insertion_point(class_specific_merge_from_start:protobuf.TestMessage1)
   GOOGLE_DCHECK_NE(&from, this);
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
@@ -277,7 +277,7 @@ void TestMessage1::MergeFrom(const TestMessage1& from) {
 }
 
 void TestMessage1::CopyFrom(const TestMessage1& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:ProtobufBlueprintSp.TestMessage1)
+// @@protoc_insertion_point(class_specific_copy_from_start:protobuf.TestMessage1)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -305,10 +305,10 @@ void TestMessage1::InternalSwap(TestMessage1* other) {
 }
 
 // @@protoc_insertion_point(namespace_scope)
-}  // namespace ProtobufBlueprintSp
+}  // namespace protobuf
 PROTOBUF_NAMESPACE_OPEN
-template<> PROTOBUF_NOINLINE ::ProtobufBlueprintSp::TestMessage1* Arena::CreateMaybeMessage< ::ProtobufBlueprintSp::TestMessage1 >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::ProtobufBlueprintSp::TestMessage1 >(arena);
+template<> PROTOBUF_NOINLINE ::protobuf::TestMessage1* Arena::CreateMaybeMessage< ::protobuf::TestMessage1 >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::protobuf::TestMessage1 >(arena);
 }
 PROTOBUF_NAMESPACE_CLOSE
 

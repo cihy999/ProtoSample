@@ -11,7 +11,7 @@
 
 void AProtoSampleGameMode::SerializeTestMessage1()
 {
-	ProtobufBlueprintSp::TestMessage1 Message;
+	protobuf::TestMessage1 Message;
 
 	Message.set_val_1(50);
 	Message.set_val_2(100);
@@ -32,7 +32,7 @@ void AProtoSampleGameMode::SerializeTestMessage1()
 
 void AProtoSampleGameMode::SerializeTestMessage2()
 {
-	ProtobufBlueprintSp::TestMessage2 Message;
+	protobuf::TestMessage2 Message;
 
 	Message.set_val_1(500);
 
@@ -52,7 +52,7 @@ void AProtoSampleGameMode::SerializeTestMessage2()
 
 void AProtoSampleGameMode::DeserializeTestMessage1()
 {
-	ProtobufBlueprintSp::TestMessage1 Message;
+	protobuf::TestMessage1 Message;
 
 	if (Message.ParseFromArray(SerializedBytes.GetData(), SerializedBytes.Num()))
 	{
@@ -68,7 +68,7 @@ void AProtoSampleGameMode::DeserializeTestMessage1()
 
 void AProtoSampleGameMode::DeserializeTestMessage2()
 {
-	ProtobufBlueprintSp::TestMessage2 Message;
+	protobuf::TestMessage2 Message;
 
 	if (Message.ParseFromArray(SerializedBytes.GetData(), SerializedBytes.Num()))
 	{
