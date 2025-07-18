@@ -9,6 +9,8 @@
 //
 #include "ProtoSampleGameMode.generated.h"
 
+class UTestMessage3;
+
 UCLASS(minimalapi)
 class AProtoSampleGameMode : public AGameModeBase
 {
@@ -27,8 +29,18 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void DeserializeTestMessage2();
 
+	UFUNCTION(BlueprintCallable)
+	void CreateTestMessage3();
+
 public:
 	AProtoSampleGameMode();
+
+protected:
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TSubclassOf<UTestMessage3> TestMessage3Class;
+
+	UPROPERTY(Transient, BlueprintReadOnly)
+	TObjectPtr<UTestMessage3> TestMessage3;
 
 private:
 	TArray<uint8> SerializedBytes;

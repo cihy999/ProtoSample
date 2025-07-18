@@ -12,4 +12,12 @@ UCLASS(Blueprintable)
 class PROTOSAMPLE_API UTestMessage3 : public UObject
 {
 	GENERATED_BODY()
+
+public:
+
+	UPROPERTY(BlueprintReadWrite)
+	bool BoolVal = false;
+
+	UPROPERTY(BlueprintReadWrite)
+	int32 Int32Val = 0;
 };

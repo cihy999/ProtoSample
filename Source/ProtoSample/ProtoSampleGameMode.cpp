@@ -7,6 +7,7 @@
 // ProtoSample
 #include "Message/TestMessage1.pb.h"
 #include "Message/TestMessage2.pb.h"
+#include "MessageObject/TestMessage3.h"
 #include "ProtoSampleCharacter.h"
 
 void AProtoSampleGameMode::SerializeTestMessage1()
@@ -108,6 +109,41 @@ void AProtoSampleGameMode::DeserializeTestMessage2()
 			default:
 				UE_LOG(LogTemp, Warning, TEXT(" [Unknown] Field %d: Unsupported type"), FieldNumber);
 				break;
+			}
+		}
+	}
+}
+
+void AProtoSampleGameMode::CreateTestMessage3()
+{
+	if (TestMessage3Class)
+	{
+		TestMessage3 = NewObject<UTestMessage3>(this, TestMessage3Class.Get());
+
+		UE_LOG(LogTemp, Log, TEXT("Create %s"), *TestMessage3->GetName());
+		UE_LOG(LogTemp, Log, TEXT(" %s's property ==="), *TestMessage3->GetName());
+
+		const UClass* MessageClass = TestMessage3->GetClass();
+		for (TFieldIterator<FProperty> PropertyIt(MessageClass); PropertyIt; ++PropertyIt)
+		{
+			const FProperty* Property = *PropertyIt;
+			if (Property)
+			{
+				FString Desc = FString::Printf(TEXT(" (%s)%s: "), 
+					*Property->GetCPPType(), 
+					*Property->GetName()
+				);
+
+				if (Property->HasAnyPropertyFlags(CPF_BlueprintReadOnly))
+				{
+					Desc.Append(TEXT("BlueprintReadOnly, "));
+				}
+				else
+				{
+					Desc.Append(TEXT("BlueprintReadWrite, "));
+				}
+
+				UE_LOG(LogTemp, Log , TEXT(" %s"), *Desc);
 			}
 		}
 	}
