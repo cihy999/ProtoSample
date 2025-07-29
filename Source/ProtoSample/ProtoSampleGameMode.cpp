@@ -119,6 +119,7 @@ void AProtoSampleGameMode::CreateTestMessage3()
 	if (TestMessage3Class)
 	{
 		TestMessage3 = NewObject<UTestMessage3>(this, TestMessage3Class.Get());
+		TestMessage3->NativeMessage = MakeUnique<protobuf::TestMessage3>();
 
 		UE_LOG(LogTemp, Log, TEXT("Create %s"), *TestMessage3->GetName());
 		UE_LOG(LogTemp, Log, TEXT(" %s's property ==="), *TestMessage3->GetName());
@@ -145,6 +146,24 @@ void AProtoSampleGameMode::CreateTestMessage3()
 
 				UE_LOG(LogTemp, Log , TEXT(" %s"), *Desc);
 			}
+		}
+
+		const google::protobuf::Descriptor* Descriptor = TestMessage3->NativeMessage->GetDescriptor();
+		const google::protobuf::Reflection* Reflection = TestMessage3->NativeMessage->GetReflection();
+
+		UE_LOG(LogTemp, Log, TEXT(" %s's field ==="), UTF8_TO_TCHAR(Descriptor->name().c_str()));
+
+		int32 FieldCount = Descriptor->field_count();
+		for (int32 i = 0; i < FieldCount; i++)
+		{
+			const google::protobuf::FieldDescriptor* Field = Descriptor->field(i);
+
+			FString Desc = FString::Printf(TEXT(" (%s)%s: "),
+				UTF8_TO_TCHAR(Field->cpp_type_name()),
+				UTF8_TO_TCHAR(Field->name().c_str())
+			);
+
+			UE_LOG(LogTemp, Log, TEXT(" %s"), *Desc);
 		}
 	}
 }

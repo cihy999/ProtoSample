@@ -5,6 +5,8 @@
 // UE
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
+// ProtoSample
+#include "Message/TestMessage3.pb.h"
 // 
 #include "TestMessage3.generated.h"
 
@@ -14,10 +16,11 @@ class PROTOSAMPLE_API UTestMessage3 : public UObject
 	GENERATED_BODY()
 
 public:
-
 	UPROPERTY(BlueprintReadWrite)
 	bool BoolVal = false;
 
 	UPROPERTY(BlueprintReadWrite)
 	int32 Int32Val = 0;
+
+	TUniquePtr<protobuf::TestMessage3> NativeMessage;
 };
