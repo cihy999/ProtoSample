@@ -122,31 +122,7 @@ void AProtoSampleGameMode::CreateTestMessage3()
 		TestMessage3->NativeMessage = MakeUnique<protobuf::TestMessage3>();
 
 		UE_LOG(LogTemp, Log, TEXT("Create %s"), *TestMessage3->GetName());
-		UE_LOG(LogTemp, Log, TEXT(" %s's property ==="), *TestMessage3->GetName());
-
-		const UClass* MessageClass = TestMessage3->GetClass();
-		for (TFieldIterator<FProperty> PropertyIt(MessageClass); PropertyIt; ++PropertyIt)
-		{
-			const FProperty* Property = *PropertyIt;
-			if (Property)
-			{
-				FString Desc = FString::Printf(TEXT(" (%s)%s: "), 
-					*Property->GetCPPType(), 
-					*Property->GetName()
-				);
-
-				if (Property->HasAnyPropertyFlags(CPF_BlueprintReadOnly))
-				{
-					Desc.Append(TEXT("BlueprintReadOnly, "));
-				}
-				else
-				{
-					Desc.Append(TEXT("BlueprintReadWrite, "));
-				}
-
-				UE_LOG(LogTemp, Log , TEXT(" %s"), *Desc);
-			}
-		}
+		DumpMessageProperty(TestMessage3);
 
 		const google::protobuf::Descriptor* Descriptor = TestMessage3->NativeMessage->GetDescriptor();
 		const google::protobuf::Reflection* Reflection = TestMessage3->NativeMessage->GetReflection();
@@ -174,4 +150,99 @@ AProtoSampleGameMode::AProtoSampleGameMode()
 	// set default pawn class to our Blueprinted character
 	static ConstructorHelpers::FClassFinder<APawn> PlayerPawnClassFinder(TEXT("/Game/FirstPerson/Blueprints/BP_FirstPersonCharacter"));
 	DefaultPawnClass = PlayerPawnClassFinder.Class;
+}
+
+void AProtoSampleGameMode::DumpMessageProperty(UObject* Message)
+{
+	if (!IsValid(Message))
+	{
+		return;
+	}
+
+	UE_LOG(LogTemp, Log, TEXT(" %s's property ==="), *Message->GetName());
+
+	for (TFieldIterator<FProperty> PropertyIt(Message->GetClass()); PropertyIt; ++PropertyIt)
+	{
+		FProperty* Property = *PropertyIt;
+		if (Property)
+		{
+			FString TypeName = Property->GetCPPType();
+			FString PropertyName = Property->GetName();
+			FString ValueString = "";
+
+			if (FBoolProperty* BoolProperty = CastField<FBoolProperty>(Property))
+			{
+				bool V = BoolProperty->GetPropertyValue_InContainer(Message);
+				ValueString = FString::Printf(TEXT("%s"), V ? TEXT("true") : TEXT("false"));
+			}
+			else if (FInt8Property* Int8Property = CastField<FInt8Property>(Property))
+			{
+				int8 V = Int8Property->GetPropertyValue_InContainer(Message);
+				ValueString = FString::Printf(TEXT("%d"), V);
+			}
+			else if (FByteProperty* ByteProperty = CastField<FByteProperty>(Property))
+			{
+				uint8 V = ByteProperty->GetPropertyValue_InContainer(Message);
+				ValueString = FString::Printf(TEXT("%d"), V);
+			}
+			else if (FInt16Property* Int16Property = CastField<FInt16Property>(Property))
+			{
+				int16 V = Int16Property->GetPropertyValue_InContainer(Message);
+				ValueString = FString::Printf(TEXT("%d"), V);
+			}
+			else if (FUInt16Property* Uint16Property = CastField<FUInt16Property>(Property))
+			{
+				uint16 V = Uint16Property->GetPropertyValue_InContainer(Message);
+				ValueString = FString::Printf(TEXT("%d"), V);
+			}
+			else if (FIntProperty* IntProperty = CastField<FIntProperty>(Property))
+			{
+				int32 V = IntProperty->GetPropertyValue_InContainer(Message);
+				ValueString = FString::Printf(TEXT("%d"), V);
+			}
+			else if (FUInt32Property* Uint32roperty = CastField<FUInt32Property>(Property))
+			{
+				uint32 V = Uint32roperty->GetPropertyValue_InContainer(Message);
+				ValueString = FString::Printf(TEXT("%u"), V);
+			}
+			else if (FInt64Property* Int64Property = CastField<FInt64Property>(Property))
+			{
+				int64 V = Int64Property->GetPropertyValue_InContainer(Message);
+				ValueString = FString::Printf(TEXT("%lld"), V);
+			}
+			else if (FUInt64Property* Uint64Property = CastField<FUInt64Property>(Property))
+			{
+				uint64 V = Uint64Property->GetPropertyValue_InContainer(Message);
+				ValueString = FString::Printf(TEXT("%llu"), V);
+			}
+			else if (FFloatProperty* FloatProperty = CastField<FFloatProperty>(Property))
+			{
+				float V = FloatProperty->GetPropertyValue_InContainer(Message);
+				ValueString = FString::Printf(TEXT("%.6e"), V);
+			}
+			else if (FDoubleProperty* DoubleProperty = CastField<FDoubleProperty>(Property))
+			{
+				double V = DoubleProperty->GetPropertyValue_InContainer(Message);
+				//ValueString = FString::Printf(TEXT("%f"), V);
+				ValueString = FString::Printf(TEXT("%.6e"), V);
+			}
+			else if (FStrProperty* StrProperty = CastField<FStrProperty>(Property))
+			{
+				FString V = StrProperty->GetPropertyValue_InContainer(Message);
+				ValueString = FString::Printf(TEXT("%s"), *V);
+			}
+			else if (FEnumProperty* EnumProperty = CastField<FEnumProperty>(Property))
+			{
+				// FEnumProperty 的底層值包在一個更內層的位置，先取得ValuePtr才轉到正確位址
+				const void* ValuePtr = EnumProperty->ContainerPtrToValuePtr<void>(Message);
+				FNumericProperty* UnderlyingProperty = EnumProperty->GetUnderlyingProperty();
+				int64 EnumValue = EnumProperty->GetUnderlyingProperty()->GetSignedIntPropertyValue(ValuePtr);
+				UEnum* EnumDef = EnumProperty->GetEnum();
+				FString EnumName = EnumDef->GetNameStringByValue(EnumValue);
+				ValueString = FString::Printf(TEXT("%s(%llu)"), *EnumName, EnumValue);
+			}
+
+			UE_LOG(LogTemp, Log, TEXT(" (%s)%s = %s"), *TypeName, *PropertyName, *ValueString);
+		}
+	}
 }

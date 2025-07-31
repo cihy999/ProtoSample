@@ -44,4 +44,6 @@ protected:
 
 private:
 	TArray<uint8> SerializedBytes;
+
+	void DumpMessageProperty(UObject* Message);
 };
