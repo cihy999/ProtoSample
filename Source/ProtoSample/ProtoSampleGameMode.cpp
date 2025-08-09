@@ -118,29 +118,19 @@ void AProtoSampleGameMode::CreateTestMessage3()
 {
 	if (TestMessage3Class)
 	{
-		TestMessage3 = NewObject<UTestMessage3>(this, TestMessage3Class.Get());
-		TestMessage3->NativeMessage = MakeUnique<protobuf::TestMessage3>();
+		TestMessage3 = UTestMessage3::MakeMessageObject(this, TestMessage3Class.Get());
+		TestMessage3->NativeMessage = UTestMessage3::MakeMessage();
+
+		TestMessage3->InitMessage();
+		TestMessage3->InitNativeMessage();
 
 		UE_LOG(LogTemp, Log, TEXT("Create %s"), *TestMessage3->GetName());
 		DumpMessageProperty(TestMessage3);
 
 		const google::protobuf::Descriptor* Descriptor = TestMessage3->NativeMessage->GetDescriptor();
 		const google::protobuf::Reflection* Reflection = TestMessage3->NativeMessage->GetReflection();
-
 		UE_LOG(LogTemp, Log, TEXT(" %s's field ==="), UTF8_TO_TCHAR(Descriptor->name().c_str()));
-
-		int32 FieldCount = Descriptor->field_count();
-		for (int32 i = 0; i < FieldCount; i++)
-		{
-			const google::protobuf::FieldDescriptor* Field = Descriptor->field(i);
-
-			FString Desc = FString::Printf(TEXT(" (%s)%s: "),
-				UTF8_TO_TCHAR(Field->cpp_type_name()),
-				UTF8_TO_TCHAR(Field->name().c_str())
-			);
-
-			UE_LOG(LogTemp, Log, TEXT(" %s"), *Desc);
-		}
+		DumpMessageField(*TestMessage3->NativeMessage.Get());
 	}
 }
 
@@ -244,5 +234,86 @@ void AProtoSampleGameMode::DumpMessageProperty(UObject* Message)
 
 			UE_LOG(LogTemp, Log, TEXT(" (%s)%s = %s"), *TypeName, *PropertyName, *ValueString);
 		}
+	}
+}
+
+void AProtoSampleGameMode::DumpMessageField(google::protobuf::Message& Message)
+{
+	const google::protobuf::Descriptor* Descriptor = TestMessage3->NativeMessage->GetDescriptor();
+	const google::protobuf::Reflection* Reflection = TestMessage3->NativeMessage->GetReflection();
+
+	int32 FieldCount = Descriptor->field_count();
+	for (int32 i = 0; i < FieldCount; i++)
+	{
+		const google::protobuf::FieldDescriptor* Field = Descriptor->field(i);
+
+		FString TypeName = UTF8_TO_TCHAR(Field->cpp_type_name());
+		FString FieldName = UTF8_TO_TCHAR(Field->name().c_str());
+		FString ValueString = "";
+
+		switch (Field->cpp_type())
+		{
+		case google::protobuf::FieldDescriptor::CPPTYPE_BOOL:
+		{
+			bool V = Reflection->GetBool(Message, Field);
+			ValueString = FString::Printf(TEXT("%s"), V ? TEXT("true") : TEXT("false"));
+		}
+		break;
+		case google::protobuf::FieldDescriptor::CPPTYPE_INT32:
+		{
+			int32 V = Reflection->GetInt32(Message, Field);
+			ValueString = FString::Printf(TEXT("%d"), V);
+		}
+		break;
+		case google::protobuf::FieldDescriptor::CPPTYPE_UINT32:
+		{
+			uint32 V = Reflection->GetUInt32(Message, Field);
+			ValueString = FString::Printf(TEXT("%u"), V);
+		}
+		break;
+		case google::protobuf::FieldDescriptor::CPPTYPE_INT64:
+		{
+			int64 V = Reflection->GetInt64(Message, Field);
+			ValueString = FString::Printf(TEXT("%lld"), V);
+		}
+		break;
+		case google::protobuf::FieldDescriptor::CPPTYPE_UINT64:
+		{
+			uint64 V = Reflection->GetUInt64(Message, Field);
+			ValueString = FString::Printf(TEXT("%llu"), V);
+		}
+		break;
+		case google::protobuf::FieldDescriptor::CPPTYPE_FLOAT:
+		{
+			float V = Reflection->GetFloat(Message, Field);
+			ValueString = FString::Printf(TEXT("%.6e"), V);
+		}
+		break;
+		case google::protobuf::FieldDescriptor::CPPTYPE_DOUBLE:
+		{
+			double V = Reflection->GetDouble(Message, Field);
+			ValueString = FString::Printf(TEXT("%.6e"), V);
+		}
+		break;
+		case google::protobuf::FieldDescriptor::CPPTYPE_STRING:
+		{
+			FString V = UTF8_TO_TCHAR(Reflection->GetString(Message, Field).c_str());
+			ValueString = FString::Printf(TEXT("%s"), *V);
+		}
+		break;
+		case google::protobuf::FieldDescriptor::CPPTYPE_ENUM:
+		{
+			const google::protobuf::EnumDescriptor* EnumDesc = Field->enum_type();
+			TypeName = UTF8_TO_TCHAR(EnumDesc->name().c_str());
+
+			const google::protobuf::EnumValueDescriptor* EnumValueDesc = Reflection->GetEnum(Message, Field); 
+			FString EnumName = UTF8_TO_TCHAR(EnumValueDesc->name().c_str());
+			int32 EnumValue = EnumValueDesc->number();
+			ValueString = FString::Printf(TEXT("%s(%d)"), *EnumName, EnumValue);
+		}
+		break;
+		}
+
+		UE_LOG(LogTemp, Log, TEXT(" (%s)%s = %s"), *TypeName, *FieldName, *ValueString);
 	}
 }

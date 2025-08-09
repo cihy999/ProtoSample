@@ -35,6 +35,7 @@
 #include <google/protobuf/message.h>
 #include <google/protobuf/repeated_field.h>  // IWYU pragma: export
 #include <google/protobuf/extension_set.h>  // IWYU pragma: export
+#include <google/protobuf/generated_enum_reflection.h>
 #include <google/protobuf/unknown_field_set.h>
 // @@protoc_insertion_point(includes)
 #include <google/protobuf/port_def.inc>
@@ -68,6 +69,32 @@ template<> ::protobuf::TestMessage3* Arena::CreateMaybeMessage<::protobuf::TestM
 PROTOBUF_NAMESPACE_CLOSE
 namespace protobuf {
 
+enum TestType : int {
+  A = 0,
+  B = 1,
+  C = 2,
+  TestType_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::min(),
+  TestType_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::max()
+};
+bool TestType_IsValid(int value);
+constexpr TestType TestType_MIN = A;
+constexpr TestType TestType_MAX = C;
+constexpr int TestType_ARRAYSIZE = TestType_MAX + 1;
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* TestType_descriptor();
+template<typename T>
+inline const std::string& TestType_Name(T enum_t_value) {
+  static_assert(::std::is_same<T, TestType>::value ||
+    ::std::is_integral<T>::value,
+    "Incorrect type passed to function TestType_Name.");
+  return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
+    TestType_descriptor(), enum_t_value);
+}
+inline bool TestType_Parse(
+    ::PROTOBUF_NAMESPACE_ID::ConstStringParam name, TestType* value) {
+  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<TestType>(
+    TestType_descriptor(), name, value);
+}
 // ===================================================================
 
 class TestMessage3 final :
@@ -192,25 +219,100 @@ class TestMessage3 final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kBoolValFieldNumber = 1,
-    kInt32ValFieldNumber = 2,
+    kValStringFieldNumber = 8,
+    kValBoolFieldNumber = 1,
+    kValInt32FieldNumber = 2,
+    kValInt64FieldNumber = 4,
+    kValUint32FieldNumber = 3,
+    kValFloatFieldNumber = 6,
+    kValUint64FieldNumber = 5,
+    kValDoubleFieldNumber = 7,
+    kValEnumFieldNumber = 9,
   };
-  // bool bool_val = 1;
-  void clear_bool_val();
-  bool bool_val() const;
-  void set_bool_val(bool value);
+  // string val_string = 8;
+  void clear_val_string();
+  const std::string& val_string() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_val_string(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_val_string();
+  PROTOBUF_NODISCARD std::string* release_val_string();
+  void set_allocated_val_string(std::string* val_string);
   private:
-  bool _internal_bool_val() const;
-  void _internal_set_bool_val(bool value);
+  const std::string& _internal_val_string() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_val_string(const std::string& value);
+  std::string* _internal_mutable_val_string();
   public:
 
-  // int32 int32_val = 2;
-  void clear_int32_val();
-  int32_t int32_val() const;
-  void set_int32_val(int32_t value);
+  // bool val_bool = 1;
+  void clear_val_bool();
+  bool val_bool() const;
+  void set_val_bool(bool value);
   private:
-  int32_t _internal_int32_val() const;
-  void _internal_set_int32_val(int32_t value);
+  bool _internal_val_bool() const;
+  void _internal_set_val_bool(bool value);
+  public:
+
+  // int32 val_int32 = 2;
+  void clear_val_int32();
+  int32_t val_int32() const;
+  void set_val_int32(int32_t value);
+  private:
+  int32_t _internal_val_int32() const;
+  void _internal_set_val_int32(int32_t value);
+  public:
+
+  // int64 val_int64 = 4;
+  void clear_val_int64();
+  int64_t val_int64() const;
+  void set_val_int64(int64_t value);
+  private:
+  int64_t _internal_val_int64() const;
+  void _internal_set_val_int64(int64_t value);
+  public:
+
+  // uint32 val_uint32 = 3;
+  void clear_val_uint32();
+  uint32_t val_uint32() const;
+  void set_val_uint32(uint32_t value);
+  private:
+  uint32_t _internal_val_uint32() const;
+  void _internal_set_val_uint32(uint32_t value);
+  public:
+
+  // float val_float = 6;
+  void clear_val_float();
+  float val_float() const;
+  void set_val_float(float value);
+  private:
+  float _internal_val_float() const;
+  void _internal_set_val_float(float value);
+  public:
+
+  // uint64 val_uint64 = 5;
+  void clear_val_uint64();
+  uint64_t val_uint64() const;
+  void set_val_uint64(uint64_t value);
+  private:
+  uint64_t _internal_val_uint64() const;
+  void _internal_set_val_uint64(uint64_t value);
+  public:
+
+  // double val_double = 7;
+  void clear_val_double();
+  double val_double() const;
+  void set_val_double(double value);
+  private:
+  double _internal_val_double() const;
+  void _internal_set_val_double(double value);
+  public:
+
+  // .protobuf.TestType val_enum = 9;
+  void clear_val_enum();
+  ::protobuf::TestType val_enum() const;
+  void set_val_enum(::protobuf::TestType value);
+  private:
+  ::protobuf::TestType _internal_val_enum() const;
+  void _internal_set_val_enum(::protobuf::TestType value);
   public:
 
   // @@protoc_insertion_point(class_scope:protobuf.TestMessage3)
@@ -220,8 +322,15 @@ class TestMessage3 final :
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
-  bool bool_val_;
-  int32_t int32_val_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr val_string_;
+  bool val_bool_;
+  int32_t val_int32_;
+  int64_t val_int64_;
+  uint32_t val_uint32_;
+  float val_float_;
+  uint64_t val_uint64_;
+  double val_double_;
+  int val_enum_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_TestMessage3_2eproto;
 };
@@ -236,44 +345,215 @@ class TestMessage3 final :
 #endif  // __GNUC__
 // TestMessage3
 
-// bool bool_val = 1;
-inline void TestMessage3::clear_bool_val() {
-  bool_val_ = false;
+// bool val_bool = 1;
+inline void TestMessage3::clear_val_bool() {
+  val_bool_ = false;
 }
-inline bool TestMessage3::_internal_bool_val() const {
-  return bool_val_;
+inline bool TestMessage3::_internal_val_bool() const {
+  return val_bool_;
 }
-inline bool TestMessage3::bool_val() const {
-  // @@protoc_insertion_point(field_get:protobuf.TestMessage3.bool_val)
-  return _internal_bool_val();
+inline bool TestMessage3::val_bool() const {
+  // @@protoc_insertion_point(field_get:protobuf.TestMessage3.val_bool)
+  return _internal_val_bool();
 }
-inline void TestMessage3::_internal_set_bool_val(bool value) {
+inline void TestMessage3::_internal_set_val_bool(bool value) {
   
-  bool_val_ = value;
+  val_bool_ = value;
 }
-inline void TestMessage3::set_bool_val(bool value) {
-  _internal_set_bool_val(value);
-  // @@protoc_insertion_point(field_set:protobuf.TestMessage3.bool_val)
+inline void TestMessage3::set_val_bool(bool value) {
+  _internal_set_val_bool(value);
+  // @@protoc_insertion_point(field_set:protobuf.TestMessage3.val_bool)
 }
 
-// int32 int32_val = 2;
-inline void TestMessage3::clear_int32_val() {
-  int32_val_ = 0;
+// int32 val_int32 = 2;
+inline void TestMessage3::clear_val_int32() {
+  val_int32_ = 0;
 }
-inline int32_t TestMessage3::_internal_int32_val() const {
-  return int32_val_;
+inline int32_t TestMessage3::_internal_val_int32() const {
+  return val_int32_;
 }
-inline int32_t TestMessage3::int32_val() const {
-  // @@protoc_insertion_point(field_get:protobuf.TestMessage3.int32_val)
-  return _internal_int32_val();
+inline int32_t TestMessage3::val_int32() const {
+  // @@protoc_insertion_point(field_get:protobuf.TestMessage3.val_int32)
+  return _internal_val_int32();
 }
-inline void TestMessage3::_internal_set_int32_val(int32_t value) {
+inline void TestMessage3::_internal_set_val_int32(int32_t value) {
   
-  int32_val_ = value;
+  val_int32_ = value;
 }
-inline void TestMessage3::set_int32_val(int32_t value) {
-  _internal_set_int32_val(value);
-  // @@protoc_insertion_point(field_set:protobuf.TestMessage3.int32_val)
+inline void TestMessage3::set_val_int32(int32_t value) {
+  _internal_set_val_int32(value);
+  // @@protoc_insertion_point(field_set:protobuf.TestMessage3.val_int32)
+}
+
+// uint32 val_uint32 = 3;
+inline void TestMessage3::clear_val_uint32() {
+  val_uint32_ = 0u;
+}
+inline uint32_t TestMessage3::_internal_val_uint32() const {
+  return val_uint32_;
+}
+inline uint32_t TestMessage3::val_uint32() const {
+  // @@protoc_insertion_point(field_get:protobuf.TestMessage3.val_uint32)
+  return _internal_val_uint32();
+}
+inline void TestMessage3::_internal_set_val_uint32(uint32_t value) {
+  
+  val_uint32_ = value;
+}
+inline void TestMessage3::set_val_uint32(uint32_t value) {
+  _internal_set_val_uint32(value);
+  // @@protoc_insertion_point(field_set:protobuf.TestMessage3.val_uint32)
+}
+
+// int64 val_int64 = 4;
+inline void TestMessage3::clear_val_int64() {
+  val_int64_ = int64_t{0};
+}
+inline int64_t TestMessage3::_internal_val_int64() const {
+  return val_int64_;
+}
+inline int64_t TestMessage3::val_int64() const {
+  // @@protoc_insertion_point(field_get:protobuf.TestMessage3.val_int64)
+  return _internal_val_int64();
+}
+inline void TestMessage3::_internal_set_val_int64(int64_t value) {
+  
+  val_int64_ = value;
+}
+inline void TestMessage3::set_val_int64(int64_t value) {
+  _internal_set_val_int64(value);
+  // @@protoc_insertion_point(field_set:protobuf.TestMessage3.val_int64)
+}
+
+// uint64 val_uint64 = 5;
+inline void TestMessage3::clear_val_uint64() {
+  val_uint64_ = uint64_t{0u};
+}
+inline uint64_t TestMessage3::_internal_val_uint64() const {
+  return val_uint64_;
+}
+inline uint64_t TestMessage3::val_uint64() const {
+  // @@protoc_insertion_point(field_get:protobuf.TestMessage3.val_uint64)
+  return _internal_val_uint64();
+}
+inline void TestMessage3::_internal_set_val_uint64(uint64_t value) {
+  
+  val_uint64_ = value;
+}
+inline void TestMessage3::set_val_uint64(uint64_t value) {
+  _internal_set_val_uint64(value);
+  // @@protoc_insertion_point(field_set:protobuf.TestMessage3.val_uint64)
+}
+
+// float val_float = 6;
+inline void TestMessage3::clear_val_float() {
+  val_float_ = 0;
+}
+inline float TestMessage3::_internal_val_float() const {
+  return val_float_;
+}
+inline float TestMessage3::val_float() const {
+  // @@protoc_insertion_point(field_get:protobuf.TestMessage3.val_float)
+  return _internal_val_float();
+}
+inline void TestMessage3::_internal_set_val_float(float value) {
+  
+  val_float_ = value;
+}
+inline void TestMessage3::set_val_float(float value) {
+  _internal_set_val_float(value);
+  // @@protoc_insertion_point(field_set:protobuf.TestMessage3.val_float)
+}
+
+// double val_double = 7;
+inline void TestMessage3::clear_val_double() {
+  val_double_ = 0;
+}
+inline double TestMessage3::_internal_val_double() const {
+  return val_double_;
+}
+inline double TestMessage3::val_double() const {
+  // @@protoc_insertion_point(field_get:protobuf.TestMessage3.val_double)
+  return _internal_val_double();
+}
+inline void TestMessage3::_internal_set_val_double(double value) {
+  
+  val_double_ = value;
+}
+inline void TestMessage3::set_val_double(double value) {
+  _internal_set_val_double(value);
+  // @@protoc_insertion_point(field_set:protobuf.TestMessage3.val_double)
+}
+
+// string val_string = 8;
+inline void TestMessage3::clear_val_string() {
+  val_string_.ClearToEmpty();
+}
+inline const std::string& TestMessage3::val_string() const {
+  // @@protoc_insertion_point(field_get:protobuf.TestMessage3.val_string)
+  return _internal_val_string();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void TestMessage3::set_val_string(ArgT0&& arg0, ArgT... args) {
+ 
+ val_string_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:protobuf.TestMessage3.val_string)
+}
+inline std::string* TestMessage3::mutable_val_string() {
+  std::string* _s = _internal_mutable_val_string();
+  // @@protoc_insertion_point(field_mutable:protobuf.TestMessage3.val_string)
+  return _s;
+}
+inline const std::string& TestMessage3::_internal_val_string() const {
+  return val_string_.Get();
+}
+inline void TestMessage3::_internal_set_val_string(const std::string& value) {
+  
+  val_string_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArenaForAllocation());
+}
+inline std::string* TestMessage3::_internal_mutable_val_string() {
+  
+  return val_string_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArenaForAllocation());
+}
+inline std::string* TestMessage3::release_val_string() {
+  // @@protoc_insertion_point(field_release:protobuf.TestMessage3.val_string)
+  return val_string_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
+}
+inline void TestMessage3::set_allocated_val_string(std::string* val_string) {
+  if (val_string != nullptr) {
+    
+  } else {
+    
+  }
+  val_string_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), val_string,
+      GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (val_string_.IsDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited())) {
+    val_string_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), "", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:protobuf.TestMessage3.val_string)
+}
+
+// .protobuf.TestType val_enum = 9;
+inline void TestMessage3::clear_val_enum() {
+  val_enum_ = 0;
+}
+inline ::protobuf::TestType TestMessage3::_internal_val_enum() const {
+  return static_cast< ::protobuf::TestType >(val_enum_);
+}
+inline ::protobuf::TestType TestMessage3::val_enum() const {
+  // @@protoc_insertion_point(field_get:protobuf.TestMessage3.val_enum)
+  return _internal_val_enum();
+}
+inline void TestMessage3::_internal_set_val_enum(::protobuf::TestType value) {
+  
+  val_enum_ = value;
+}
+inline void TestMessage3::set_val_enum(::protobuf::TestType value) {
+  _internal_set_val_enum(value);
+  // @@protoc_insertion_point(field_set:protobuf.TestMessage3.val_enum)
 }
 
 #ifdef __GNUC__
@@ -283,6 +563,16 @@ inline void TestMessage3::set_int32_val(int32_t value) {
 // @@protoc_insertion_point(namespace_scope)
 
 }  // namespace protobuf
+
+PROTOBUF_NAMESPACE_OPEN
+
+template <> struct is_proto_enum< ::protobuf::TestType> : ::std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::protobuf::TestType>() {
+  return ::protobuf::TestType_descriptor();
+}
+
+PROTOBUF_NAMESPACE_CLOSE
 
 // @@protoc_insertion_point(global_scope)
 

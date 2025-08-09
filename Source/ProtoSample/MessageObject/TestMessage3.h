@@ -28,41 +28,48 @@ public:
 	bool ValBool = false;
 
 	UPROPERTY()
-	int8 ValInt8 = INT8_MIN;
+	int8 ValInt8 = 0;
 
 	UPROPERTY(BlueprintReadWrite)
-	uint8 ValUint8 = UINT8_MAX;
+	uint8 ValUint8 = 0;
 
 	UPROPERTY()
-	int16 ValInt16 = INT16_MIN;
+	int16 ValInt16 = 0;
 
 	UPROPERTY()
-	uint16 ValUint16 = UINT16_MAX;
+	uint16 ValUint16 = 0;
 
 	UPROPERTY(BlueprintReadWrite)
-	int32 ValInt32 = INT_MIN;
+	int32 ValInt32 = 0;
 
 	UPROPERTY()
-	uint32 ValUint32 = UINT32_MAX;
+	uint32 ValUint32 = 0;
 
 	UPROPERTY(BlueprintReadWrite)
-	int64 ValInt64 = INT64_MIN;
+	int64 ValInt64 = 0;
 
 	UPROPERTY()
-	uint64 ValUint64 = UINT64_MAX;
+	uint64 ValUint64 = 0;
 
 	UPROPERTY(BlueprintReadWrite)
-	float ValFloat = FLT_MIN;
+	float ValFloat = 0;
 
 	UPROPERTY()
-	double ValDouble = DBL_MAX;
+	double ValDouble = 0;
 
 	UPROPERTY(BlueprintReadWrite)
-	FString ValString = TEXT("Cindy");
+	FString ValString = "";
 
 	UPROPERTY(BlueprintReadWrite)
-	ETestType ValEnum = ETestType::C;
+	ETestType ValEnum;
 
 public:
 	TUniquePtr<protobuf::TestMessage3> NativeMessage;
+
+public:
+	static UTestMessage3* MakeMessageObject(UObject* Outer, TSubclassOf<UTestMessage3> BlueprintClass);
+	static TUniquePtr<protobuf::TestMessage3> MakeMessage();
+
+	void InitMessage();
+	void InitNativeMessage();
 };

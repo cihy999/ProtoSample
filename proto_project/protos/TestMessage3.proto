@@ -1,7 +1,21 @@
 syntax = "proto3";
 package protobuf;
 
+enum TestType
+{
+	A = 0;
+	B = 1;
+	C = 2;
+}
+
 message TestMessage3 {
-    bool bool_val = 1;
-    int32 int32_val = 2;
+    bool val_bool = 1;
+    int32 val_int32 = 2;
+    uint32 val_uint32 = 3;
+    int64 val_int64 = 4;
+    uint64 val_uint64 = 5;
+    float val_float = 6;
+    double val_double = 7;
+    string val_string = 8;
+    TestType val_enum = 9;
 }

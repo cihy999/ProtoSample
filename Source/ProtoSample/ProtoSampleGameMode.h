@@ -4,6 +4,8 @@
 
 // UE
 #include "CoreMinimal.h"
+// Protobuf
+#include "google/protobuf/message.h"
 // ProtoSample
 #include "GameFramework/GameModeBase.h"
 //
@@ -46,4 +48,5 @@ private:
 	TArray<uint8> SerializedBytes;
 
 	void DumpMessageProperty(UObject* Message);
+	void DumpMessageField(google::protobuf::Message& Message);
 };

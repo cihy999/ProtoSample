@@ -38,8 +38,16 @@ PROTOBUF_PRAGMA_INIT_SEG
 namespace protobuf {
 constexpr TestMessage3::TestMessage3(
   ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : bool_val_(false)
-  , int32_val_(0){}
+  : val_string_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
+  , val_bool_(false)
+  , val_int32_(0)
+  , val_int64_(int64_t{0})
+  , val_uint32_(0u)
+  , val_float_(0)
+  , val_uint64_(uint64_t{0u})
+  , val_double_(0)
+  , val_enum_(0)
+{}
 struct TestMessage3DefaultTypeInternal {
   constexpr TestMessage3DefaultTypeInternal()
     : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
@@ -51,7 +59,7 @@ struct TestMessage3DefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT TestMessage3DefaultTypeInternal _TestMessage3_default_instance_;
 }  // namespace protobuf
 static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_TestMessage3_2eproto[1];
-static constexpr ::PROTOBUF_NAMESPACE_ID::EnumDescriptor const** file_level_enum_descriptors_TestMessage3_2eproto = nullptr;
+static const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* file_level_enum_descriptors_TestMessage3_2eproto[1];
 static constexpr ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor const** file_level_service_descriptors_TestMessage3_2eproto = nullptr;
 
 const uint32_t TableStruct_TestMessage3_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
@@ -61,8 +69,15 @@ const uint32_t TableStruct_TestMessage3_2eproto::offsets[] PROTOBUF_SECTION_VARI
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::protobuf::TestMessage3, bool_val_),
-  PROTOBUF_FIELD_OFFSET(::protobuf::TestMessage3, int32_val_),
+  PROTOBUF_FIELD_OFFSET(::protobuf::TestMessage3, val_bool_),
+  PROTOBUF_FIELD_OFFSET(::protobuf::TestMessage3, val_int32_),
+  PROTOBUF_FIELD_OFFSET(::protobuf::TestMessage3, val_uint32_),
+  PROTOBUF_FIELD_OFFSET(::protobuf::TestMessage3, val_int64_),
+  PROTOBUF_FIELD_OFFSET(::protobuf::TestMessage3, val_uint64_),
+  PROTOBUF_FIELD_OFFSET(::protobuf::TestMessage3, val_float_),
+  PROTOBUF_FIELD_OFFSET(::protobuf::TestMessage3, val_double_),
+  PROTOBUF_FIELD_OFFSET(::protobuf::TestMessage3, val_string_),
+  PROTOBUF_FIELD_OFFSET(::protobuf::TestMessage3, val_enum_),
 };
 static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, -1, sizeof(::protobuf::TestMessage3)},
@@ -73,13 +88,18 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
 };
 
 const char descriptor_table_protodef_TestMessage3_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\022TestMessage3.proto\022\010protobuf\"3\n\014TestMe"
-  "ssage3\022\020\n\010bool_val\030\001 \001(\010\022\021\n\tint32_val\030\002 "
-  "\001(\005b\006proto3"
+  "\n\022TestMessage3.proto\022\010protobuf\"\317\001\n\014TestM"
+  "essage3\022\020\n\010val_bool\030\001 \001(\010\022\021\n\tval_int32\030\002"
+  " \001(\005\022\022\n\nval_uint32\030\003 \001(\r\022\021\n\tval_int64\030\004 "
+  "\001(\003\022\022\n\nval_uint64\030\005 \001(\004\022\021\n\tval_float\030\006 \001"
+  "(\002\022\022\n\nval_double\030\007 \001(\001\022\022\n\nval_string\030\010 \001"
+  "(\t\022$\n\010val_enum\030\t \001(\0162\022.protobuf.TestType"
+  "*\037\n\010TestType\022\005\n\001A\020\000\022\005\n\001B\020\001\022\005\n\001C\020\002b\006proto"
+  "3"
   ;
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_TestMessage3_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_TestMessage3_2eproto = {
-  false, false, 91, descriptor_table_protodef_TestMessage3_2eproto, "TestMessage3.proto", 
+  false, false, 281, descriptor_table_protodef_TestMessage3_2eproto, "TestMessage3.proto", 
   &descriptor_table_TestMessage3_2eproto_once, nullptr, 0, 1,
   schemas, file_default_instances, TableStruct_TestMessage3_2eproto::offsets,
   file_level_metadata_TestMessage3_2eproto, file_level_enum_descriptors_TestMessage3_2eproto, file_level_service_descriptors_TestMessage3_2eproto,
@@ -91,6 +111,21 @@ PROTOBUF_ATTRIBUTE_WEAK const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable
 // Force running AddDescriptors() at dynamic initialization time.
 PROTOBUF_ATTRIBUTE_INIT_PRIORITY static ::PROTOBUF_NAMESPACE_ID::internal::AddDescriptorsRunner dynamic_init_dummy_TestMessage3_2eproto(&descriptor_table_TestMessage3_2eproto);
 namespace protobuf {
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* TestType_descriptor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_TestMessage3_2eproto);
+  return file_level_enum_descriptors_TestMessage3_2eproto[0];
+}
+bool TestType_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+      return true;
+    default:
+      return false;
+  }
+}
+
 
 // ===================================================================
 
@@ -110,17 +145,29 @@ TestMessage3::TestMessage3(::PROTOBUF_NAMESPACE_ID::Arena* arena,
 TestMessage3::TestMessage3(const TestMessage3& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  ::memcpy(&bool_val_, &from.bool_val_,
-    static_cast<size_t>(reinterpret_cast<char*>(&int32_val_) -
-    reinterpret_cast<char*>(&bool_val_)) + sizeof(int32_val_));
+  val_string_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    val_string_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), "", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_val_string().empty()) {
+    val_string_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_val_string(), 
+      GetArenaForAllocation());
+  }
+  ::memcpy(&val_bool_, &from.val_bool_,
+    static_cast<size_t>(reinterpret_cast<char*>(&val_enum_) -
+    reinterpret_cast<char*>(&val_bool_)) + sizeof(val_enum_));
   // @@protoc_insertion_point(copy_constructor:protobuf.TestMessage3)
 }
 
 inline void TestMessage3::SharedCtor() {
+val_string_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  val_string_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), "", GetArenaForAllocation());
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 ::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
-    reinterpret_cast<char*>(&bool_val_) - reinterpret_cast<char*>(this)),
-    0, static_cast<size_t>(reinterpret_cast<char*>(&int32_val_) -
-    reinterpret_cast<char*>(&bool_val_)) + sizeof(int32_val_));
+    reinterpret_cast<char*>(&val_bool_) - reinterpret_cast<char*>(this)),
+    0, static_cast<size_t>(reinterpret_cast<char*>(&val_enum_) -
+    reinterpret_cast<char*>(&val_bool_)) + sizeof(val_enum_));
 }
 
 TestMessage3::~TestMessage3() {
@@ -132,6 +179,7 @@ TestMessage3::~TestMessage3() {
 
 inline void TestMessage3::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  val_string_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
 void TestMessage3::ArenaDtor(void* object) {
@@ -150,9 +198,10 @@ void TestMessage3::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  ::memset(&bool_val_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&int32_val_) -
-      reinterpret_cast<char*>(&bool_val_)) + sizeof(int32_val_));
+  val_string_.ClearToEmpty();
+  ::memset(&val_bool_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&val_enum_) -
+      reinterpret_cast<char*>(&val_bool_)) + sizeof(val_enum_));
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -162,19 +211,78 @@ const char* TestMessage3::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_I
     uint32_t tag;
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // bool bool_val = 1;
+      // bool val_bool = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
-          bool_val_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          val_bool_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
-      // int32 int32_val = 2;
+      // int32 val_int32 = 2;
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
-          int32_val_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          val_int32_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // uint32 val_uint32 = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 24)) {
+          val_uint32_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // int64 val_int64 = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 32)) {
+          val_int64_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // uint64 val_uint64 = 5;
+      case 5:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 40)) {
+          val_uint64_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // float val_float = 6;
+      case 6:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 53)) {
+          val_float_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
+          ptr += sizeof(float);
+        } else
+          goto handle_unusual;
+        continue;
+      // double val_double = 7;
+      case 7:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 57)) {
+          val_double_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<double>(ptr);
+          ptr += sizeof(double);
+        } else
+          goto handle_unusual;
+        continue;
+      // string val_string = 8;
+      case 8:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 66)) {
+          auto str = _internal_mutable_val_string();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "protobuf.TestMessage3.val_string"));
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // .protobuf.TestType val_enum = 9;
+      case 9:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 72)) {
+          uint64_t val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+          _internal_set_val_enum(static_cast<::protobuf::TestType>(val));
         } else
           goto handle_unusual;
         continue;
@@ -207,16 +315,71 @@ uint8_t* TestMessage3::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // bool bool_val = 1;
-  if (this->_internal_bool_val() != 0) {
+  // bool val_bool = 1;
+  if (this->_internal_val_bool() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(1, this->_internal_bool_val(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(1, this->_internal_val_bool(), target);
   }
 
-  // int32 int32_val = 2;
-  if (this->_internal_int32_val() != 0) {
+  // int32 val_int32 = 2;
+  if (this->_internal_val_int32() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(2, this->_internal_int32_val(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(2, this->_internal_val_int32(), target);
+  }
+
+  // uint32 val_uint32 = 3;
+  if (this->_internal_val_uint32() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(3, this->_internal_val_uint32(), target);
+  }
+
+  // int64 val_int64 = 4;
+  if (this->_internal_val_int64() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(4, this->_internal_val_int64(), target);
+  }
+
+  // uint64 val_uint64 = 5;
+  if (this->_internal_val_uint64() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt64ToArray(5, this->_internal_val_uint64(), target);
+  }
+
+  // float val_float = 6;
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_val_float = this->_internal_val_float();
+  uint32_t raw_val_float;
+  memcpy(&raw_val_float, &tmp_val_float, sizeof(tmp_val_float));
+  if (raw_val_float != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(6, this->_internal_val_float(), target);
+  }
+
+  // double val_double = 7;
+  static_assert(sizeof(uint64_t) == sizeof(double), "Code assumes uint64_t and double are the same size.");
+  double tmp_val_double = this->_internal_val_double();
+  uint64_t raw_val_double;
+  memcpy(&raw_val_double, &tmp_val_double, sizeof(tmp_val_double));
+  if (raw_val_double != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteDoubleToArray(7, this->_internal_val_double(), target);
+  }
+
+  // string val_string = 8;
+  if (!this->_internal_val_string().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_val_string().data(), static_cast<int>(this->_internal_val_string().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "protobuf.TestMessage3.val_string");
+    target = stream->WriteStringMaybeAliased(
+        8, this->_internal_val_string(), target);
+  }
+
+  // .protobuf.TestType val_enum = 9;
+  if (this->_internal_val_enum() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteEnumToArray(
+      9, this->_internal_val_enum(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -235,14 +398,60 @@ size_t TestMessage3::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // bool bool_val = 1;
-  if (this->_internal_bool_val() != 0) {
+  // string val_string = 8;
+  if (!this->_internal_val_string().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_val_string());
+  }
+
+  // bool val_bool = 1;
+  if (this->_internal_val_bool() != 0) {
     total_size += 1 + 1;
   }
 
-  // int32 int32_val = 2;
-  if (this->_internal_int32_val() != 0) {
-    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32SizePlusOne(this->_internal_int32_val());
+  // int32 val_int32 = 2;
+  if (this->_internal_val_int32() != 0) {
+    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32SizePlusOne(this->_internal_val_int32());
+  }
+
+  // int64 val_int64 = 4;
+  if (this->_internal_val_int64() != 0) {
+    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64SizePlusOne(this->_internal_val_int64());
+  }
+
+  // uint32 val_uint32 = 3;
+  if (this->_internal_val_uint32() != 0) {
+    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32SizePlusOne(this->_internal_val_uint32());
+  }
+
+  // float val_float = 6;
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_val_float = this->_internal_val_float();
+  uint32_t raw_val_float;
+  memcpy(&raw_val_float, &tmp_val_float, sizeof(tmp_val_float));
+  if (raw_val_float != 0) {
+    total_size += 1 + 4;
+  }
+
+  // uint64 val_uint64 = 5;
+  if (this->_internal_val_uint64() != 0) {
+    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt64SizePlusOne(this->_internal_val_uint64());
+  }
+
+  // double val_double = 7;
+  static_assert(sizeof(uint64_t) == sizeof(double), "Code assumes uint64_t and double are the same size.");
+  double tmp_val_double = this->_internal_val_double();
+  uint64_t raw_val_double;
+  memcpy(&raw_val_double, &tmp_val_double, sizeof(tmp_val_double));
+  if (raw_val_double != 0) {
+    total_size += 1 + 8;
+  }
+
+  // .protobuf.TestType val_enum = 9;
+  if (this->_internal_val_enum() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::EnumSize(this->_internal_val_enum());
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_cached_size_);
@@ -267,11 +476,40 @@ void TestMessage3::MergeFrom(const TestMessage3& from) {
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (from._internal_bool_val() != 0) {
-    _internal_set_bool_val(from._internal_bool_val());
+  if (!from._internal_val_string().empty()) {
+    _internal_set_val_string(from._internal_val_string());
   }
-  if (from._internal_int32_val() != 0) {
-    _internal_set_int32_val(from._internal_int32_val());
+  if (from._internal_val_bool() != 0) {
+    _internal_set_val_bool(from._internal_val_bool());
+  }
+  if (from._internal_val_int32() != 0) {
+    _internal_set_val_int32(from._internal_val_int32());
+  }
+  if (from._internal_val_int64() != 0) {
+    _internal_set_val_int64(from._internal_val_int64());
+  }
+  if (from._internal_val_uint32() != 0) {
+    _internal_set_val_uint32(from._internal_val_uint32());
+  }
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_val_float = from._internal_val_float();
+  uint32_t raw_val_float;
+  memcpy(&raw_val_float, &tmp_val_float, sizeof(tmp_val_float));
+  if (raw_val_float != 0) {
+    _internal_set_val_float(from._internal_val_float());
+  }
+  if (from._internal_val_uint64() != 0) {
+    _internal_set_val_uint64(from._internal_val_uint64());
+  }
+  static_assert(sizeof(uint64_t) == sizeof(double), "Code assumes uint64_t and double are the same size.");
+  double tmp_val_double = from._internal_val_double();
+  uint64_t raw_val_double;
+  memcpy(&raw_val_double, &tmp_val_double, sizeof(tmp_val_double));
+  if (raw_val_double != 0) {
+    _internal_set_val_double(from._internal_val_double());
+  }
+  if (from._internal_val_enum() != 0) {
+    _internal_set_val_enum(from._internal_val_enum());
   }
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -289,13 +527,20 @@ bool TestMessage3::IsInitialized() const {
 
 void TestMessage3::InternalSwap(TestMessage3* other) {
   using std::swap;
+  auto* lhs_arena = GetArenaForAllocation();
+  auto* rhs_arena = other->GetArenaForAllocation();
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      &val_string_, lhs_arena,
+      &other->val_string_, rhs_arena
+  );
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(TestMessage3, int32_val_)
-      + sizeof(TestMessage3::int32_val_)
-      - PROTOBUF_FIELD_OFFSET(TestMessage3, bool_val_)>(
-          reinterpret_cast<char*>(&bool_val_),
-          reinterpret_cast<char*>(&other->bool_val_));
+      PROTOBUF_FIELD_OFFSET(TestMessage3, val_enum_)
+      + sizeof(TestMessage3::val_enum_)
+      - PROTOBUF_FIELD_OFFSET(TestMessage3, val_bool_)>(
+          reinterpret_cast<char*>(&val_bool_),
+          reinterpret_cast<char*>(&other->val_bool_));
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata TestMessage3::GetMetadata() const {
