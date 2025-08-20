@@ -1,8 +1,13 @@
 {
     "folders": [
 		{
+			"name": "ProtoSample",
 			"path": "."
 		},
+		{
+			"name": "UE5",
+			"path": "D:\\Program Files\\Epic Games\\UE_5.5"
+		}
     ],
     "settings": {
         "editor.tabSize": 4,

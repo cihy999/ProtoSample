@@ -8,6 +8,7 @@
 #include "Message/TestMessage1.pb.h"
 #include "Message/TestMessage2.pb.h"
 #include "MessageObject/TestMessage3.h"
+#include "MessageObject/TestMessage4.h"
 #include "ProtoSampleCharacter.h"
 
 void AProtoSampleGameMode::SerializeTestMessage1()
@@ -116,9 +117,9 @@ void AProtoSampleGameMode::DeserializeTestMessage2()
 
 void AProtoSampleGameMode::CreateTestMessage3()
 {
-	if (TestMessage3Class)
+	if (TestMessage3_Class)
 	{
-		TestMessage3 = UTestMessage3::MakeMessageObject(this, TestMessage3Class.Get());
+		TestMessage3 = UTestMessage3::MakeMessageObject(this, TestMessage3_Class.Get());
 		TestMessage3->NativeMessage = UTestMessage3::MakeMessage();
 
 		TestMessage3->InitMessage();
@@ -131,6 +132,18 @@ void AProtoSampleGameMode::CreateTestMessage3()
 		const google::protobuf::Reflection* Reflection = TestMessage3->NativeMessage->GetReflection();
 		UE_LOG(LogTemp, Log, TEXT(" %s's field ==="), UTF8_TO_TCHAR(Descriptor->name().c_str()));
 		DumpMessageField(*TestMessage3->NativeMessage.Get());
+	}
+}
+
+void AProtoSampleGameMode::CreateTestMessage4()
+{
+	if (TestMessage4_Class)
+	{
+		TestMessage4 = NewObject<UTestMessage4>(this, TestMessage4_Class.Get());
+		TestMessage4->InitMessage();
+
+		UE_LOG(LogTemp, Log, TEXT("Create %s"), *TestMessage4->GetName());
+		DumpObjectProperty(TestMessage4);
 	}
 }
 
@@ -233,6 +246,45 @@ void AProtoSampleGameMode::DumpMessageProperty(UObject* Message)
 			}
 
 			UE_LOG(LogTemp, Log, TEXT(" (%s)%s = %s"), *TypeName, *PropertyName, *ValueString);
+		}
+	}
+}
+
+void AProtoSampleGameMode::DumpObjectProperty(UObject* Message)
+{
+	if (!IsValid(Message))
+	{
+		return;
+	}
+
+	UE_LOG(LogTemp, Log, TEXT(" %s's object property ==="), *Message->GetName());
+
+	for (TFieldIterator<FProperty> PropertyIt(Message->GetClass()); PropertyIt; ++PropertyIt)
+	{
+		FProperty* Property = *PropertyIt;
+
+		if (FIntProperty* IntProperty = CastField<FIntProperty>(Property))
+		{
+			FString TypeName = Property->GetCPPType();
+			FString PropertyName = Property->GetName();
+			FString ValueString = FString::Printf(TEXT("%d"), IntProperty->GetPropertyValue_InContainer(Message));
+			
+			UE_LOG(LogTemp, Log, TEXT(" (%s)%s = %s"), *TypeName, *PropertyName, *ValueString);
+		}
+		else if (FObjectProperty* ObjectProperty = CastField<FObjectProperty>(Property))
+		{
+			void* ValuePtr = ObjectProperty->ContainerPtrToValuePtr<void>(Message);
+			UObject* ReferencedObject = ObjectProperty->GetObjectPropertyValue(ValuePtr);
+
+			if (ReferencedObject)
+			{
+				FString TypeName = ReferencedObject->GetClass()->GetName();
+				FString PropertyName = Property->GetName();
+
+				UE_LOG(LogTemp, Log, TEXT(" (%s)%s = "), *TypeName, *PropertyName);
+
+				DumpObjectProperty(ReferencedObject);
+			}
 		}
 	}
 }

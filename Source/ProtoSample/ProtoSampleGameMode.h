@@ -12,6 +12,7 @@
 #include "ProtoSampleGameMode.generated.h"
 
 class UTestMessage3;
+class UTestMessage4;
 
 UCLASS(minimalapi)
 class AProtoSampleGameMode : public AGameModeBase
@@ -34,19 +35,29 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void CreateTestMessage3();
 
+	UFUNCTION(BlueprintCallable)
+	void CreateTestMessage4();
+
 public:
 	AProtoSampleGameMode();
 
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	TSubclassOf<UTestMessage3> TestMessage3Class;
+	TSubclassOf<UTestMessage3> TestMessage3_Class;
 
 	UPROPERTY(Transient, BlueprintReadOnly)
 	TObjectPtr<UTestMessage3> TestMessage3;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TSubclassOf<UTestMessage4> TestMessage4_Class;
+
+	UPROPERTY(Transient, BlueprintReadOnly)
+	TObjectPtr<UTestMessage4> TestMessage4;
 
 private:
 	TArray<uint8> SerializedBytes;
 
 	void DumpMessageProperty(UObject* Message);
+	void DumpObjectProperty(UObject* Message);
 	void DumpMessageField(google::protobuf::Message& Message);
 };
