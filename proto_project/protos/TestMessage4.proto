@@ -1,0 +1,16 @@
+syntax = "proto3";
+package protobuf;
+
+message TestSubMessage2 {
+    int32 id = 1;
+}
+
+message TestSubMessage1 {
+    int32 id = 1;
+    TestSubMessage2 sub = 2;
+}
+
+message TestMessage4 {
+    int32 id = 1;
+    TestSubMessage1 sub = 2;
+}

@@ -8,6 +8,7 @@
 #include "google/protobuf/message.h"
 // ProtoSample
 #include "GameFramework/GameModeBase.h"
+#include "Message/TestMessage4.pb.h"
 //
 #include "ProtoSampleGameMode.generated.h"
 
@@ -54,10 +55,13 @@ protected:
 	UPROPERTY(Transient, BlueprintReadOnly)
 	TObjectPtr<UTestMessage4> TestMessage4;
 
+	TUniquePtr<protobuf::TestMessage4> ProtoTestMessage4;
+
 private:
 	TArray<uint8> SerializedBytes;
 
 	void DumpMessageProperty(UObject* Message);
 	void DumpObjectProperty(UObject* Message);
 	void DumpMessageField(google::protobuf::Message& Message);
+	void DumpObjectField(google::protobuf::Message& Message);
 };

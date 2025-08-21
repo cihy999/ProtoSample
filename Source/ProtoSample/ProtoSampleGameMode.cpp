@@ -144,6 +144,11 @@ void AProtoSampleGameMode::CreateTestMessage4()
 
 		UE_LOG(LogTemp, Log, TEXT("Create %s"), *TestMessage4->GetName());
 		DumpObjectProperty(TestMessage4);
+
+		ProtoTestMessage4 = MakeUnique<protobuf::TestMessage4>();
+		const google::protobuf::Descriptor* Descriptor = ProtoTestMessage4->GetDescriptor();
+		UE_LOG(LogTemp, Log, TEXT("Create %s"), UTF8_TO_TCHAR(Descriptor->name().c_str()));
+		DumpObjectField(*ProtoTestMessage4.Get());
 	}
 }
 
@@ -367,5 +372,38 @@ void AProtoSampleGameMode::DumpMessageField(google::protobuf::Message& Message)
 		}
 
 		UE_LOG(LogTemp, Log, TEXT(" (%s)%s = %s"), *TypeName, *FieldName, *ValueString);
+	}
+}
+
+void AProtoSampleGameMode::DumpObjectField(google::protobuf::Message& Message)
+{
+	const google::protobuf::Descriptor* Descriptor = TestMessage3->NativeMessage->GetDescriptor();
+	const google::protobuf::Reflection* Reflection = TestMessage3->NativeMessage->GetReflection();
+
+	int32 FieldCount = Descriptor->field_count();
+	for (int32 i = 0; i < FieldCount; i++)
+	{
+		const google::protobuf::FieldDescriptor* Field = Descriptor->field(i);
+
+		FString TypeName = UTF8_TO_TCHAR(Field->cpp_type_name());
+		FString FieldName = UTF8_TO_TCHAR(Field->name().c_str());
+		FString ValueString = "";
+
+		if (Field->cpp_type() == google::protobuf::FieldDescriptor::CPPTYPE_INT32)
+		{
+			int32 V = Reflection->GetInt32(Message, Field);
+			ValueString = FString::Printf(TEXT("%d"), V);
+			UE_LOG(LogTemp, Log, TEXT(" (%s)%s = %s"), *TypeName, *FieldName, *ValueString);
+		}
+		else if (Field->cpp_type() == google::protobuf::FieldDescriptor::CPPTYPE_MESSAGE)
+		{
+			if (!Field->is_repeated() && Reflection->HasField(Message, Field))
+			{
+				UE_LOG(LogTemp, Log, TEXT(" (%s)%s = "), *TypeName, *FieldName);
+
+				google::protobuf::Message* SubMsg = Reflection->MutableMessage(&Message, Field);
+				DumpObjectField(*SubMsg);
+			}
+		}
 	}
 }
