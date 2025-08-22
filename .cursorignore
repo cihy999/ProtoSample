@@ -18,63 +18,51 @@
 #
 # 格式範例：https://cursor.qiannianlu.com/docs/context/ignore-files/
 
-# 排除特定檔案類型（敏感編譯檔案）
-*.obj
-*.o
-*.lo
-*.slo
-*.pch
-*.gch
+# 排除特定檔案類型
+*.a
+*.app
 *.dll
 *.dylib
-*.so
-*.a
+*.exe
+*.gch
+*.ipa
 *.la
 *.lai
 *.lib
-*.app
-*.exe
-*.ipa
-*.out
+*.lo
 *.mod
 *.ncb
+*.o
+*.obj
 *.opensdf
+*.out
+*.pch
 *.pdb
 *.sdf
 *.sln
+*.slo
+*.so
 *.suo
-*.VC.db
-*.VC.opendb
-*.xcworkspace
+*.uproject
 *.xcodeproj
+*.xcworkspace
 
 # 版本控制
 **/.git*
 **/.svn
+**/*.md
+**/LICENSE
 
 # 編輯器
 **/.idea
-**/.venv
 **/.vs
 **/.vscode
-**/*.vsconfig
+**/.vsconfig
 **/.editorconfig
-~*
-**/~*
-**/.~*
 
-# Unreal Engine（大型文件，允許 AI 存取但不索引）
+# UE專案
 **/Binaries
-#**/*Build*
 **/DerivedDataCache
-**/Engine/Documentation
-**/Engine/Extras
 **/Intermediate
-**/Engine/Platforms
 **/Plugins/**/Resources
-**/Engine/Programs
 **/Saved
-**/Engine/Shaders
-
-# UE 專案
-**/LICENSE
