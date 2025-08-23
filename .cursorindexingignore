@@ -18,16 +18,6 @@
 #
 # 格式範例：https://cursor.qiannianlu.com/docs/context/ignore-files/
 
-# 排除特定檔案類型
-.code-workspace
-
-# 版本控制
-
-# Unreal Engine (太多檔案，只好全部排除...)
-**/Engine
-
 # UE 專案
+**/Config
 **/Content
-**/Plugins/**/Resources
-*.uplugin
-*.md
